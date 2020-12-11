@@ -64,3 +64,8 @@ git push -u origin module_4
 ```
 
 ## Vagrant Instructions
+
+vagrant up will start the VM and Flask. It can be accesed at the following URL
+
+http://localhost:5001/
+
