@@ -50,3 +50,21 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+
+## Running in Docker
+
+The code has been modified to run within Docker.
+
+Use the following to builld and run the image. There are 2 versions
+1 - Development that uses Flask only 
+2 - Production that uses Gunicorn WSGI to scale
+
+These can be run as foillows
+
+docker build --target development --tag todo_app .
+docker run --env-file .env -p 5001:5000 todo_app
+
+docker build --target production --tag todo_app .
+docker run --env-file .env -p 5001:5000 todo_app
+
