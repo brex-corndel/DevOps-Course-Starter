@@ -62,9 +62,15 @@ Use the following to builld and run the image. There are 2 versions
 
 These can be run as foillows
 
+* Developmemt
+
 docker build --target development --tag todo_app .
+
 docker run --env-file .env -p 5001:5000 todo_app
 
+* Production
+
 docker build --target production --tag todo_app .
+
 docker run --env-file .env -p 5001:5000 todo_app
 
