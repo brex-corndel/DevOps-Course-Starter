@@ -20,12 +20,19 @@ Vagrant.configure("2") do |config|
   /home/vagrant/.pyenv/bin/pyenv install 3.8.5
   /home/vagrant/.pyenv/bin/pyenv global 3.8.5
 
-  # echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.bash_profile
-  # cd /vagrant && $HOME/.poetry/bin/poetry install
+  echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.bash_profile
 
   exec "$SHELL"
 
-
-
 SHELL
+
+config.trigger.after :up do |trigger|
+    trigger.name = "Launching App"
+    trigger.info = "Running the TODO app setup script"
+    trigger.run_remote = {privileged: false, inline: "
+      # Install dependencies and launch
+      cd /vagrant && $HOME/.poetry/bin/poetry install
+      $HOME/.poetry/bin/poetry run flask run
+    "}
+end
 end
