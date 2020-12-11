@@ -50,3 +50,17 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Git Instructions
+
+Module_4 is focussed on using the todo_app using Vagrant.
+The following instructions are used to add the changes to GIT
+
+```bash
+git checkout -b module_4
+git add .
+git commit -m "New Branch to look at Vagrantfile"
+git push -u origin module_4
+```
+
+## Vagrant Instructions
