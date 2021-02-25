@@ -1,17 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
-# from todo_app.flask_config import Config
+
 import todo_app.trello_client as trello_client
 from todo_app.view_model import ViewModel
 from todo_app.data.todo_item import TodoItem
 
 app = Flask(__name__)
-# app.config.from_object(Config)
-
-# def create_app():
-#    app = Flask(__name__) 
-#    app.config.from_object('app_config.Config')
-   # All the routes and setup code etc
-# return app
 
 @app.route('/')
 def index():
@@ -33,8 +26,6 @@ def complete_item():
     todo_id = request.form['id']
     trello_client.complete_todo(todo_id)
     return redirect('/')
-
-
 
 if __name__ == '__main__':
     app.run()
