@@ -64,6 +64,8 @@ Items are marked To Do, Doing and Done. The 'complete action' button has been ad
 
 poetry install pytest
 
+To run a test session for unit testing :-
+
 poetry run pytest
 
 ## Working with GIT

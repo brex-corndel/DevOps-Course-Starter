@@ -28,4 +28,12 @@ class ViewModel:
       for item in self._items:
           if item.status == "Done":
             done_list.append(item)
-      return done_list
+            
+      if len(self.done) < 5:
+            return done_list
+      else:
+            return done_list[:4]
+
+# show_all_done_items?
+# recent_done_items?
+# older_done_items?
