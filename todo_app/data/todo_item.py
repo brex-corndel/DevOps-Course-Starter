@@ -1,10 +1,12 @@
 import os
+from datetime import datetime
 
 class TodoItem:
-    def __init__(self, id, status, title):
+    def __init__(self, id, status, title, updated_time = datetime.now()):
         self.id = id
         self.status = status
         self.title = title
+        self.updated_time = updated_time
 
     @classmethod
     def from_raw_trello_card(cls, card):
@@ -19,4 +21,6 @@ class TodoItem:
         elif card["idList"] == os.getenv("TRELLO_DONE_LIST_ID"):
             status = "Done"
 
-        return cls(id, status, title)
+        updated_time = datetime.strptime(card["dateLastActivity"], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        return cls(id, status, title, updated_time)

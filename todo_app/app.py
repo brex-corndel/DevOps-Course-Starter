@@ -4,11 +4,8 @@ import todo_app.trello_client as trello_client
 from todo_app.view_model import ViewModel
 from todo_app.data.todo_item import TodoItem
 
-# app = Flask(__name__)
-
 def create_app():
-   app = Flask(__name__) 
-   app.config.from_object('app_config.Config')
+    app = Flask(__name__)
 
     @app.route('/')
     def index():
@@ -29,9 +26,9 @@ def create_app():
         trello_client.complete_todo(todo_id)
         return redirect('/')
 
-return app
+    return app
 
 if __name__ == '__main__':
-    app.run()
+    create_app().run()
 
 

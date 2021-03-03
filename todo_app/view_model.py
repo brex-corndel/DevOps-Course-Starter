@@ -1,3 +1,7 @@
+from datetime import datetime, date
+
+# now = datetime.now()
+
 class ViewModel:
    def __init__(self, items):
         self._items = items
@@ -28,12 +32,24 @@ class ViewModel:
       for item in self._items:
           if item.status == "Done":
             done_list.append(item)
-            
-      if len(self.done) < 5:
-            return done_list
-      else:
-            return done_list[:4]
+      return done_list
 
-# show_all_done_items?
-# recent_done_items?
-# older_done_items?
+   @property
+   def show_all_done_items(self):
+      if len(self.done) < 5:
+         return True
+      else:
+         return False
+      
+   @property
+   def recent_done_items(self):
+      done_today_list=[]
+      for item in self._items:
+          if item.status == "Done" and item.updated_time.date() == date.today():
+            done_today_list.append(item)
+      return done_today_list 
+
+# older_done_items? dateLastActivity
+   @property
+   def older_done_items(self):
+      pass

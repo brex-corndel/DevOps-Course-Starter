@@ -1,6 +1,6 @@
 from todo_app.view_model import ViewModel
 from todo_app.data.todo_item import TodoItem
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 def test_view_model_can_show_todo_items():
     items = [
@@ -41,7 +41,16 @@ def test_show_all_done_items():
 # return all the tasks that have been completed today.
 
 def test_recent_done_items():
-    pass
+    items = [
+        TodoItem("1", "Done", "Recent Done", datetime.now()),
+        TodoItem("2", "Done", "Old Done", datetime.now() - timedelta(days=1))
+    ]
+
+    view_model = ViewModel(items)
+
+    recent_todos = view_model.recent_done_items
+
+    assert len(recent_todos) == 1
 
 # Rturn all of the tasks that were completed before today.
 

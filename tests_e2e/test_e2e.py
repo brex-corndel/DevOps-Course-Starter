@@ -1,13 +1,14 @@
 import os
+from dotenv import load_dotenv, find_dotenv
 from threading import Thread
 from selenium import webdriver 
 
 @pytest.fixture(scope="module") 
 def driver():
-    with webdriver.Firefox() as driver 
-    yield driver
+    with webdriver.Firefox() as driver:
+        yield driver
 
- @pytest.fixture(scope='module') 
+ @pytest.fixture(scope="module") 
  def app_with_temp_board():
 
 # Create the new board & update the board id environment variable
