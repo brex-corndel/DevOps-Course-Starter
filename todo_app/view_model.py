@@ -49,7 +49,10 @@ class ViewModel:
             done_today_list.append(item)
       return done_today_list 
 
-# older_done_items? dateLastActivity
    @property
    def older_done_items(self):
-      pass
+      done_older_list=[]
+      for item in self._items:
+          if item.status == "Done" and item.updated_time.date() < date.today():
+            done_older_list.append(item)
+      return done_older_list 

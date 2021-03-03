@@ -28,13 +28,13 @@ sample_trello_lists_response = [
     {
         "name": "A card",
         "id": "daisdhksdhkhksdjhkjasdh",
-        "idList": os.getenv("TRELLO_TODO_LIST_ID").
+        "idList": os.getenv("TRELLO_TODO_LIST_ID"),
         "dateLastActivity": "2017-02-16T13:00:21.457Z",
     },
     {
         "name": "A card",
         "id": "daisdhksdhkhksdjhkjasdh",
-        "idList": os.getenv("TRELLO_TODO_LIST_ID").
+        "idList": os.getenv("TRELLO_TODO_LIST_ID"),
         "dateLastActivity": "2017-02-16T13:00:21.457Z",
     }
 ]
