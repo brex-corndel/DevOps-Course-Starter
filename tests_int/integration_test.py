@@ -20,31 +20,32 @@ def client():
 
 @patch('requests.get')
 def test_index_page(mock_get_requests, client):
-# Replace call to requests.get(url) with our own function
+
     mock_get_requests.side_effect = mock_get_lists 
     response = client.get('/') 
-
-sample_trello_lists_response = [
-    {
-        "name": "A card",
-        "id": "daisdhksdhkhksdjhkjasdh",
-        "idList": os.getenv("TRELLO_TODO_LIST_ID"),
-        "dateLastActivity": "2017-02-16T13:00:21.457Z",
-    },
-    {
-        "name": "A card",
-        "id": "daisdhksdhkhksdjhkjasdh",
-        "idList": os.getenv("TRELLO_TODO_LIST_ID"),
-        "dateLastActivity": "2017-02-16T13:00:21.457Z",
-    }
-]
+    assert 'A card' in response.data.decode()
 
 
 def mock_get_lists(url, params):
+    sample_trello_lists_response = [
+        {
+            "name": "A card",
+            "id": "daisdhksdhkhksdjhkjasdh",
+            "idList": os.getenv("TRELLO_TODO_LIST_ID"),
+            "dateLastActivity": "2017-02-16T13:00:21.457Z",
+        },
+        {
+            "name": "A card",
+            "id": "daisdhksdhkhksdjhkjasdh",
+            "idList": os.getenv("TRELLO_TODO_LIST_ID"),
+            "dateLastActivity": "2017-02-16T13:00:21.457Z",
+        }
+    ]
+
     trello_board_id = os.getenv("TRELLO_BOARD_ID")
     if url == f'https://api.trello.com/1/boards/{trello_board_id}/cards':
         response = Mock()
-
+        response.status_code = 200
         response.json.return_value = sample_trello_lists_response
         return response 
     return None
