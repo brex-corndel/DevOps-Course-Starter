@@ -25,4 +25,4 @@ CMD ["poetry", "run", "flask", "run", "--host=0.0.0.0"]
 
 
 FROM base as production
-CMD ["gunicorn", "todo_app.app:app"]
+CMD ["poetry", "run", "gunicorn", "todo_app.app:app", "--host=0.0.0.0"]
