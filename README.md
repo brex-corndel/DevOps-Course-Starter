@@ -71,5 +71,5 @@ docker run --env-file .env -p 5001:5000 todo_app
 * Production
 ```bash
 docker build --target production --tag todo_app .
-docker run --env-file .env -p 5001:5000 todo_app
+docker run --env-file .env -p 5001:5000 todo_app --mount type=bind,source="$(pwd)"/target,target=/app 
 ```
