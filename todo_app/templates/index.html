@@ -20,15 +20,15 @@
           </tr>
           {% for k in view_model.items %}
               <tr>
-                  <td>{{ k.title }}</td>
-                  <td>{{ k.status }}</td>
+                  <td name="item-title" >{{ k.title }}</td>
+                  <td name="item-status" >{{ k.status }}</td>
                   <td>
                     <form action="/complete_item" method="POST">
                       <input type="text" id="complete-item-{{k.id}}" name="id" value="{{k.id}}" hidden>
-                      <input type="submit" value="Complete Item">
+                      <input type="submit" name="item-complete-button" value="Complete Item">
                     </form>
                   </td>
-                  </tr>
+                </tr>
           {% endfor %}
         </table>
         <h2> --------------------------------------------------------------------------- </h2>

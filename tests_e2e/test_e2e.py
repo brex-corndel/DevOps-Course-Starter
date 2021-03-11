@@ -5,6 +5,10 @@ from selenium import webdriver
 import pytest
 import requests
 from todo_app import app
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.webelement import WebElement
+import time
+import todo_app.trello_client as trello_client
 
 @pytest.fixture(scope="module") 
 def driver():
@@ -47,6 +51,14 @@ def app_with_temp_board():
     board_id = create_trello_board()
     os.environ['TRELLO_BOARD_ID'] = board_id 
 
+    lists = trello_client.get_lists_for_board()
+
+    todo_list = [list for list in lists if list["name"] == "To Do"][0]
+    done_list = [list for list in lists if list["name"] == "Done"][0]
+
+    os.environ['TRELLO_TODO_LIST_ID'] = todo_list["id"]
+    os.environ['TRELLO_DONE_LIST_ID'] = done_list["id"]
+
 # construct the new application
 
     application = app.create_app() 
@@ -56,6 +68,9 @@ def app_with_temp_board():
     thread = Thread(target=lambda: application.run(use_reloader=False))
     thread.daemon = True
     thread.start()
+
+    time.sleep(5)
+
     yield app
 
 # Tear Down
@@ -66,3 +81,22 @@ def app_with_temp_board():
 def test_task_journey(driver, app_with_temp_board): 
     driver.get('http://localhost:5000/')
     assert driver.title == 'To-Do App'
+
+    title_box = driver.find_element_by_id("Title")
+    title_box.send_keys("e2e Test Todo")
+
+    time.sleep(10)
+
+    title_box.send_keys(Keys.RETURN)
+
+    time.sleep(10)
+
+    driver.find_element_by_name("item-complete-button").click()
+
+    time.sleep(10)
+
+    title_element: WebElement = driver.find_element_by_name("item-title")
+    status_element: WebElement = driver.find_element_by_name("item-status")
+    
+    assert title_element.text == "e2e Test Todo"
+    assert status_element.text == "Done"
