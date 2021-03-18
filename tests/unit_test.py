@@ -23,13 +23,13 @@ def test_view_model_can_show_todo_items():
     assert todo_item.status == "To Do"
     assert todo_item.title == "New Todo"
 
-    assert todo_item.id == "2"
-    assert todo_item.status == "Doing"
-    assert todo_item.title == "New Doing"
-
-    assert todo_item.id == "2"
-    assert todo_item.status == "Done"
-    assert todo_item.title == "New Done"
+    assert doing_items[0].id == "2"
+    assert doing_items[0].status == "Doing"
+    assert doing_items[0].title == "New Doing"
+    
+    assert done_items[0].id == "3"
+    assert done_items[0].status == "Done"
+    assert done_items[0].title == "New Done"
 
  
 

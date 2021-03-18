@@ -24,7 +24,7 @@ The project uses a virtual environment to isolate package dependencies. To creat
 $ poetry install
 ```
 
-You'll also need to clone a new `.env` file from the `.env.tempalate` to store local configuration options. This is a one-time operation on firgitst setup:
+You'll also need to clone a new `.env` file from the `.env.tempalate` to store local configuration options. This is a one-time operation on first setup:
 
 ```bash
 $ cp .env.template .env  # (first time only)
@@ -66,6 +66,11 @@ poetry install pytest
 
 To run a test session for unit testing :-
 
+poetry run pytest
+
+To run end to end tests 
+
+cd tests_e2e
 poetry run pytest
 
 ## Working with GIT

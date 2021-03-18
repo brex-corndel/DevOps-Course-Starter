@@ -12,7 +12,8 @@ import todo_app.trello_client as trello_client
 
 @pytest.fixture(scope="module") 
 def driver():
-    with webdriver.Firefox(executable_path='/Users/bacis/Documents/Corndel/Module-3/DevOps-Course-Starter/geckodriver') as driver:
+ #   with webdriver.Firefox(executable_path='/Users/bacis/Documents/Corndel/Module-3/DevOps-Course-Starter/geckodriver') as driver:
+    with webdriver.Firefox() as driver:
         yield driver
 
 def create_trello_board():
@@ -80,20 +81,15 @@ def app_with_temp_board():
 
 def test_task_journey(driver, app_with_temp_board): 
     driver.get('http://localhost:5000/')
+    driver.implicitly_wait(10)
     assert driver.title == 'To-Do App'
 
     title_box = driver.find_element_by_id("Title")
     title_box.send_keys("e2e Test Todo")
 
-    time.sleep(10)
-
     title_box.send_keys(Keys.RETURN)
 
-    time.sleep(10)
-
     driver.find_element_by_name("item-complete-button").click()
-
-    time.sleep(10)
 
     title_element: WebElement = driver.find_element_by_name("item-title")
     status_element: WebElement = driver.find_element_by_name("item-status")
