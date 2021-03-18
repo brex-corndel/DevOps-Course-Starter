@@ -70,6 +70,7 @@ poetry run pytest
 
 To run end to end tests 
 
+ensure gechodriver is installed in the root directory and included in the path
 cd tests_e2e
 poetry run pytest
 
