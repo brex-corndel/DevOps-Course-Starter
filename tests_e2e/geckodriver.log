@@ -1,0 +1,29 @@
+1616102567154	geckodriver	INFO	Listening on 127.0.0.1:65397
+1616102567175	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/rk/r318km4146z08dq_832v5dx80000gn/T/rust_mozprofilept3pwv"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1616102571005	Marionette	INFO	Listening on port 65402
+1616102571125	Marionette	WARN	TLS certificate errors will be ignored for this session
+1616102571142	Marionette	ERROR	[19] No reply from Marionette:Register
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1616102579479	Marionette	INFO	Stopped listening on port 65402
+1616102825902	geckodriver	INFO	Listening on 127.0.0.1:65531
+1616102825922	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/rk/r318km4146z08dq_832v5dx80000gn/T/rust_mozprofileLj6S5B"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1616102829117	Marionette	INFO	Listening on port 49152
+1616102829178	Marionette	WARN	TLS certificate errors will be ignored for this session
+1616102829201	Marionette	ERROR	[19] No reply from Marionette:Register
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1616102836327	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1616102838514	Marionette	INFO	Stopped listening on port 49152
+1616102913309	geckodriver	INFO	Listening on 127.0.0.1:49266
+1616102913325	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/rk/r318km4146z08dq_832v5dx80000gn/T/rust_mozprofile40lGEL"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1616102916498	Marionette	INFO	Listening on port 49271
+1616102916732	Marionette	WARN	TLS certificate errors will be ignored for this session
+1616102916746	Marionette	ERROR	[19] No reply from Marionette:Register
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1616102923826	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1616102926003	Marionette	INFO	Stopped listening on port 49271

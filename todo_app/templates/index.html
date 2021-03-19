@@ -14,24 +14,26 @@
         <!-- List the todo items here -->
         <table border="1" border-collapse="collapse" padding="10px">
           <tr>
-                  <th> ID </th>
                   <th> TITLE </th>
                   <th> STATUS </th>
                   <th> ACTIONS </th>
-                  
           </tr>
-          {% for k in items_list %}
+          {% for k in view_model.items %}
               <tr>
-                  <td>{{ k.id }}</td>
-                  <td>{{ k.title }}</td>
-                  <td>{{ k.status }}</td>
-
-                  </tr>
+                  <td name="item-title" >{{ k.title }}</td>
+                  <td name="item-status" >{{ k.status }}</td>
+                  <td>
+                    <form action="/complete_item" method="POST">
+                      <input type="text" id="complete-item-{{k.id}}" name="id" value="{{k.id}}" hidden>
+                      <input type="submit" name="item-complete-button" value="Complete Item">
+                    </form>
+                  </td>
+                </tr>
           {% endfor %}
         </table>
         <h2> --------------------------------------------------------------------------- </h2>
         <h1> Add Items </h1>
-        <form action="/" method="POST">
+        <form action="/add_item" method="POST">
           <label for="Title">Title:</label><br>
           <input type="text" id="Title" name="Title">
           <input type="submit" value="Add Item">

@@ -30,7 +30,7 @@ You'll also need to clone a new `.env` file from the `.env.tempalate` to store l
 $ cp .env.template .env  # (first time only)
 ```
 
-The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
+The `.env` file is used by flask to set environment variables when running `flask run`. 
 
 ## Running the App
 
@@ -73,3 +73,43 @@ docker run --env-file .env -p 5001:5000 todo_app
 docker build --target production --tag todo_app .
 docker run --env-file .env -p 5001:5000 todo_app --mount type=bind,source="$(pwd)"/target,target=/app 
 ```
+## Operations
+
+The backend is now in Trello. The local .env file contains the variables. These are not shared in Github
+
+Items are marked To Do, Doing and Done. The 'complete action' button has been added to move any item to Done *
+
+
+* Future revision should limit this to To Do and Doing Only.
+
+## Working with pytest
+
+poetry install pytest
+
+To run a test session for unit testing :-
+
+poetry run pytest
+
+To run end to end tests 
+
+ensure gechodriver is installed in the root directory and included in the path
+cd tests_e2e
+poetry run pytest
+
+## Working with GIT
+
+git add --all
+
+git commit -m "<add change details>"
+  
+git push origin module-2
+
+## Working with Selenium
+
+poetry add selenium
+
+selenium --version
+
+
+  
+  

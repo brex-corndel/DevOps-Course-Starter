@@ -12,6 +12,9 @@ gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.6.0"
+pytest = "^6.2.1"
+requests = "^2.25.1"
+selenium = "^3.141.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
