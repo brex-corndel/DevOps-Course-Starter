@@ -120,5 +120,5 @@ env/
 .env
 
 ### geckodriver files
-.geckodriver
+geckodriver
 tests_e2e/geckodriver.log
