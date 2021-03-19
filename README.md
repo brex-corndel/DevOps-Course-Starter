@@ -60,18 +60,18 @@ Use the following to builld and run the image. There are 2 versions
 1 - Development that uses Flask only 
 2 - Production that uses Gunicorn WSGI to scale
 
-These can be run as foillows
+These can be run as follows
 
 * Developmemt
 ```bash
 docker build --target development --tag todo_app .
-docker run --env-file .env -p 5001:5000 todo_app
+docker run --env-file .env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo_app
 ```
 
 * Production
 ```bash
 docker build --target production --tag todo_app .
-docker run --env-file .env -p 5001:5000 todo_app --mount type=bind,source="$(pwd)"/target,target=/app 
+docker run --env-file .env -p 5000:5000 todo_app
 ```
 ## Operations
 

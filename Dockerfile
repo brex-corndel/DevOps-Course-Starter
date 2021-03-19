@@ -19,10 +19,10 @@ COPY poetry.toml /app
 
 RUN poetry install
 
-
 FROM base as development
-CMD ["poetry", "run", "flask", "run", "--host=0.0.0.0"]
-
+ENTRYPOINT ["poetry", "run", "flask", "run"]
+CMD [ "--host=0.0.0.0"]
 
 FROM base as production
-CMD ["poetry", "run", "gunicorn", "todo_app.app:app", "--host=0.0.0.0"]
+ENTRYPOINT ["poetry", "run", "gunicorn", "todo_app.app:create_app()"]
+CMD ["--bind","0.0.0.0:5000"]
