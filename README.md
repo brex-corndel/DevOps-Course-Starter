@@ -110,6 +110,17 @@ poetry add selenium
 
 selenium --version
 
+## Working with Docker
+
+## Basic Docker Connands
+
+# Testing With Docker
+$ docker build --target test --tag my-test-image .
+# Run tests in the "tests" directory
+$ docker run my-test-image tests
+# Maybe your e2e tests are somewhere else? Run them:
+$ docker run my-test-image <path_to_other_tests>
+
 
   
   
