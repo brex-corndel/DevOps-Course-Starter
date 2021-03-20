@@ -116,10 +116,12 @@ selenium --version
 
 # Testing With Docker
 $ docker build --target test --tag my-test-image .
-# Run tests in the "tests" directory
+# Run Unit Tests
 $ docker run my-test-image tests
-# Maybe your e2e tests are somewhere else? Run them:
-$ docker run my-test-image <path_to_other_tests>
+# Run Integration tests
+docker run my-test-image tests_int
+# Run end to end tests
+$ docker run my-test-image tests_e2e
 
 
   

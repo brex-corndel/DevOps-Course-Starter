@@ -29,7 +29,7 @@ FROM base as production
 ENTRYPOINT ["poetry", "run", "gunicorn", "todo_app.app:create_app()"]
 CMD ["--bind","0.0.0.0:5000"]
 
-# testing stage
+# Testing stage
 FROM base as test
 
 # Install Chrome
@@ -44,8 +44,17 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
 
+# Install Chrome Driver
+RUN mkdir -p /opt/chrome \
+    && curl http://chromedriver.storage.googleapis.com/70.0.3538.16/chromedriver_linux64.zip -o /opt/chrome/chromedriver_linux64.zip \
+    && cd /opt/chrome; unzip /opt/chrome/chromedriver_linux64.zip; rm -rf chromedriver_linux64.zip; ln -fs /opt/chrome/chromedriver /usr/local/bin/chromedriver;
+
+# Install Tests
 COPY tests /app/tests
 COPY tests_int /app/tests_int
 COPY tests_e2e /app/tests_e2e
+
+# COPY geckodriver geckodriver 
+ENV PATH "$PATH:/app"
 
 ENTRYPOINT ["poetry", "run", "pytest"]
