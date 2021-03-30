@@ -1,2 +1,2 @@
  script:
-- echo "hello world"
+- docker run my-test-image tests

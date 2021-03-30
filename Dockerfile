@@ -13,19 +13,19 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 # Set the working directory.
 WORKDIR /app
-COPY todo_app /app/todo_app
 COPY pyproject.toml /app
 COPY poetry.toml /app
 
-RUN poetry install
-
 # Development Docker
 FROM base as development
+RUN poetry install
 ENTRYPOINT ["poetry", "run", "flask", "run"]
 CMD [ "--host=0.0.0.0"]
 
 # Production Docker
 FROM base as production
+RUN poetry config virtualenvs.create false --local && poetry install --no-dev
+COPY todo_app /app/todo_app
 ENTRYPOINT ["poetry", "run", "gunicorn", "todo_app.app:create_app()"]
 CMD ["--bind","0.0.0.0:5000"]
 
@@ -43,11 +43,6 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     curl -sSL https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip -o chromedriver_linux64.zip &&\
     apt-get install unzip -y &&\
     unzip ./chromedriver_linux64.zip
-
-# Install Chrome Driver
-RUN mkdir -p /opt/chrome \
-    && curl https://chromedriver.storage.googleapis.com/index.html?path=90.0.4430.24/chromedriver_linux64.zip -o /opt/chrome/chromedriver_linux64.zip \
-    && cd /opt/chrome; unzip /opt/chrome/chromedriver_linux64.zip; rm -rf chromedriver_linux64.zip; ln -fs /opt/chrome/chromedriver /usr/local/bin/chromedriver;
 
 # Install Tests
 COPY tests /app/tests
