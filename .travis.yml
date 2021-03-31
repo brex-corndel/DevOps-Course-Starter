@@ -1,3 +1,4 @@
  script:
  - docker build --target test --tag todo_test .
  - docker run todo_test tests
+ - docker run todo_test tests_int
