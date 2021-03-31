@@ -32,6 +32,8 @@ CMD ["--bind","0.0.0.0:5000"]
 # Testing stage
 FROM base as test
 
+RUN poetry install
+
 # Install Chrome
 RUN curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb &&\
     apt-get install ./chrome.deb -y &&\
@@ -45,6 +47,7 @@ RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE
     unzip ./chromedriver_linux64.zip
 
 # Install Tests
+COPY todo_app /app/todo_app
 COPY tests /app/tests
 COPY tests_int /app/tests_int
 COPY tests_e2e /app/tests_e2e
