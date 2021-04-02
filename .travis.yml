@@ -1,6 +1,5 @@
-before_script:
-   - echo $DOCKER_PASSWD | docker login --username $DOCKER_USER --password-stdin
 script:
+   - echo $DOCKER_PASSWD | docker login --username $DOCKER_USER --password-stdin
    - docker build --target test --tag todo_test .
    - docker run todo_test tests
    - docker run todo_test tests_int
