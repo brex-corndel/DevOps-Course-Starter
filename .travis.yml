@@ -1,5 +1,8 @@
-script:
+services:
+  - docker
+before_script:
    - echo $DOCKER_PASSWD | docker login --username $DOCKER_USERNAME --password-stdin
+script:
    - docker build --target test --tag todo_test .
    - docker run todo_test tests
    - docker run todo_test tests_int
@@ -7,14 +10,12 @@ script:
 
    - docker build --target production --tag todo-app:latest . 
    - docker push todo-app:latest
-
 notifications:
   email:
     recipients:
       - jeremybrex@gmail.com
     on_success: always
     on_failure: always
-
 env:
  global:
    - DOCKER_USERNAME = "j3rry99"
