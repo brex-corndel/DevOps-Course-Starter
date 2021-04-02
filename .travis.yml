@@ -1,18 +1,15 @@
-services:
-- docker
-
 env:
  global:
    - DOCKER_USER = "j3rry99"
 
  before_script:
-   - echo "$DOCKER_PASSWD" | docker login --username $DOCKER_USER --password-stdin
+   - echo $DOCKER_PASSWD | docker login --username $DOCKER_USER --password-stdin
  script:
    - docker build --target test --tag todo_test .
    - docker run todo_test tests
    - docker run todo_test tests_int
    - docker run -e TRELLO_API_KEY -e TRELLO_API_TOKEN todo_test tests_e2e
-   
+
    - docker build --target production --tag $DOCKER_USER/todo-app:latest .  
    - docker push $DOCKER_USER/todo-app:latest
 
