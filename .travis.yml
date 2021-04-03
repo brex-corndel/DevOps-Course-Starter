@@ -9,7 +9,8 @@ script:
    - docker run -e TRELLO_API_KEY -e TRELLO_API_TOKEN todo_test tests_e2e
 
    - docker build --target production --tag todo-app:latest . 
-   - docker push todo-app:latest
+   - docker tag todo-app:latest j3rry99/corndel:todo-app
+   - docker push j3rry99/corndel:todo-app
 notifications:
   email:
     recipients:

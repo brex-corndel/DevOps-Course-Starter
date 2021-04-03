@@ -144,5 +144,20 @@ docker-compose up --f docker-compose-prod
 
 https://travis-ci.com/github/brex-corndel/DevOps-Course-Starter
 
+# Docker Hub
+
+docker images
+
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+docker tag 721eaed5fe5 corndel/todo-app:latest
+docker push corndel/todo-app:latest
+
+docker tag todo-app:latest corndel/todo-app
+docker push todo-app:latest
+
+docker tag todo-app:latest corndel:todo-app:latest
+docker push corndel/todo-app:latest
   
   
