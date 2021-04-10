@@ -24,10 +24,16 @@ CMD [ "--host=0.0.0.0"]
 
 # Production Docker
 FROM base as production
+ENV PORT=5000
+ENV FLASK_APP=todo_app/app
+ENV FLASK_ENV=production
+
+# EXPOSE $PORT
 RUN poetry config virtualenvs.create false --local && poetry install --no-dev
 COPY todo_app /app/todo_app
-ENTRYPOINT ["poetry", "run", "gunicorn", "todo_app.app:create_app()"]
-CMD ["--bind","0.0.0.0:5000"]
+COPY herokoentrypoint.sh . 
+RUN chmod +x herokuentrypoint.sh
+ENTRYPOINT ["./herokuentrypoint.sh"]
 
 # Testing stage
 FROM base as test

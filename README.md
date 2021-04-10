@@ -159,5 +159,33 @@ docker push todo-app:latest
 
 docker tag todo-app:latest corndel:todo-app:latest
 docker push corndel/todo-app:latest
+
+# Heroku Commands
+
+heroku login
+heroku plugins:install @heroku-cli/plugin-container-registry
+heroku config:set `cat .env | grep TRELLO_API_KEY`
+heroku config:set `cat .env | grep TRELLO_API_TOKEN`
+
+TRELLO_BOARD_ID
+TRELLO_TODO_LIST_ID
+TRELLO_DOING_LIST_ID
+SECRET_KEY
+
+heroku create
+
+in travis file
+
+heroku container:login - pass in as credentials
+docker tag j3rry99/corndel:todo-app registry.heroku.com/protected-ridge-40530/web
+docker push registry.heroku.com/protected-ridge-40530/web
+
+Heroku API
+env HEROKU_API_KEY
+heroku container:release web
+
+heroku open
+heroku logs --tail
+
   
   
