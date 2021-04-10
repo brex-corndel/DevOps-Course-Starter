@@ -17,9 +17,10 @@ before_deploy:
    - docker push registry.heroku.com/protected-ridge-40530/web
 deploy:
   provider: script
-  script: heroku container:release web
+  script: 
+    - heroku container:release web
   on:
-    branch: module-8
+    branch:  module-8
 
 notifications:
   email:
@@ -30,4 +31,3 @@ notifications:
 env:
   global:
    - DOCKER_USERNAME = "j3rry99"
-   
