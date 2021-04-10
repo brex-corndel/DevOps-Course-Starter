@@ -30,3 +30,4 @@ notifications:
 env:
   global:
    - DOCKER_USERNAME = "j3rry99"
+   

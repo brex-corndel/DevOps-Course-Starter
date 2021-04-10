@@ -31,7 +31,7 @@ ENV FLASK_ENV=production
 # EXPOSE $PORT
 RUN poetry config virtualenvs.create false --local && poetry install --no-dev
 COPY todo_app /app/todo_app
-COPY herokoentrypoint.sh . 
+COPY herokuentrypoint.sh . 
 RUN chmod +x herokuentrypoint.sh
 ENTRYPOINT ["./herokuentrypoint.sh"]
 
