@@ -96,6 +96,12 @@ ensure gechodriver is installed in the root directory and included in the path
 cd tests_e2e
 poetry run pytest
 
+Within docker run the following :-
+
+    docker run todo_test tests
+    docker run todo_test tests_int
+    docker run --env-file .env todo_test tests_e2e
+
 ## Working with GIT
 
 git add --all
@@ -110,6 +116,33 @@ poetry add selenium
 
 selenium --version
 
+## Working with Docker
+
+## Basic Docker Connands
+
+docker ps
+
+# Testing With Docker
+docker build --target test --tag my-test-image .
+or 
+
+docker-compose up
+docker-compose stop
+
+# Run Unit Tests
+docker run my-test-image tests
+# Run Integration tests
+docker run my-test-image tests_int
+# Run end to end tests
+docker run my-test-image tests_e2e
+
+# Production Docker
+
+docker-compose up --f docker-compose-prod
+
+# Travis
+
+https://travis-ci.com/github/brex-corndel/DevOps-Course-Starter
 
   
   

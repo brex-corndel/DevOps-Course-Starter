@@ -13,16 +13,45 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 # Set the working directory.
 WORKDIR /app
-COPY todo_app /app/todo_app
 COPY pyproject.toml /app
 COPY poetry.toml /app
 
-RUN poetry install
-
+# Development Docker
 FROM base as development
+RUN poetry install
 ENTRYPOINT ["poetry", "run", "flask", "run"]
 CMD [ "--host=0.0.0.0"]
 
+# Production Docker
 FROM base as production
+RUN poetry config virtualenvs.create false --local && poetry install --no-dev
+COPY todo_app /app/todo_app
 ENTRYPOINT ["poetry", "run", "gunicorn", "todo_app.app:create_app()"]
 CMD ["--bind","0.0.0.0:5000"]
+
+# Testing stage
+FROM base as test
+
+RUN poetry install
+
+# Install Chrome
+RUN curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb &&\
+    apt-get install ./chrome.deb -y &&\
+    rm ./chrome.deb
+    
+# Install Chromium WebDriver
+RUN LATEST=`curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE` &&\
+    echo "Installing chromium webdriver version ${LATEST}" &&\
+    curl -sSL https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip -o chromedriver_linux64.zip &&\
+    apt-get install unzip -y &&\
+    unzip ./chromedriver_linux64.zip
+
+# Install Tests
+COPY todo_app /app/todo_app
+COPY tests /app/tests
+COPY tests_int /app/tests_int
+COPY tests_e2e /app/tests_e2e
+
+ENV PATH "$PATH:/app"
+
+ENTRYPOINT ["poetry", "run", "pytest"]

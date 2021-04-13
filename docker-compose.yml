@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    env_file: .env
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    image: todo-app:dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - type: bind
+        source: ./todo_app
+        target: /app/todo_app
+
+# docker build --target development --tag todo_app .
+# docker run --env-file .env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app
