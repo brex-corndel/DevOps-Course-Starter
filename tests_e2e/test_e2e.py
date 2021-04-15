@@ -12,8 +12,12 @@ import todo_app.trello_client as trello_client
 
 @pytest.fixture(scope="module") 
 def driver():
- #   with webdriver.Firefox(executable_path='/Users/bacis/Documents/Corndel/Module-3/DevOps-Course-Starter/geckodriver') as driver:
-    with webdriver.Firefox() as driver:
+ #   with webdriver.Firefox() as driver:
+    opts = webdriver.ChromeOptions()
+    opts.add_argument('--headless') 
+    opts.add_argument('--no-sandbox') 
+    opts.add_argument('--disable-dev-shm-usage')
+    with webdriver.Chrome(options=opts) as driver:
         yield driver
 
 def create_trello_board():

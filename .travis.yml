@@ -1,0 +1,34 @@
+services:
+  - docker
+before_script:
+   - echo $DOCKER_PASSWD | docker login --username $DOCKER_USERNAME --password-stdin
+script:
+   - docker build --target test --tag todo_test .
+   - docker run todo_test tests
+   - docker run todo_test tests_int
+   - docker run -e TRELLO_API_KEY -e TRELLO_API_TOKEN todo_test tests_e2e
+
+   - docker build --target production --tag todo-app:latest . 
+   - docker tag todo-app:latest j3rry99/corndel:todo-app
+   - docker push j3rry99/corndel:todo-app
+before_deploy:
+   - echo $HEROKU_API_KEY | docker login --username=$HEROKU_USER --password-stdin registry.heroku.com
+   - docker tag j3rry99/corndel:todo-app registry.heroku.com/protected-ridge-40530/web
+   - docker push registry.heroku.com/protected-ridge-40530/web
+deploy:
+  provider: script
+  script: 
+    - heroku container:release web --app protected-ridge-40530
+  on:
+    branch:  module-8
+
+notifications:
+  email:
+    recipients:
+      - jeremybrex@gmail.com
+    on_success: always
+    on_failure: always
+env:
+  global:
+   - DOCKER_USERNAME = "j3rry99"
+   - HEROKU_APP = protected-ridge-40530

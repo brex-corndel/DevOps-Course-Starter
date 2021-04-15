@@ -96,6 +96,12 @@ ensure gechodriver is installed in the root directory and included in the path
 cd tests_e2e
 poetry run pytest
 
+Within docker run the following :-
+
+    docker run todo_test tests
+    docker run todo_test tests_int
+    docker run --env-file .env todo_test tests_e2e
+
 ## Working with GIT
 
 git add --all
@@ -110,6 +116,77 @@ poetry add selenium
 
 selenium --version
 
+## Working with Docker
+
+## Basic Docker Connands
+
+docker ps
+
+# Testing With Docker
+docker build --target test --tag my-test-image .
+or 
+
+docker-compose up
+docker-compose stop
+
+# Run Unit Tests
+docker run my-test-image tests
+# Run Integration tests
+docker run my-test-image tests_int
+# Run end to end tests
+docker run my-test-image tests_e2e
+
+# Production Docker
+
+docker-compose up --f docker-compose-prod
+
+# Travis
+
+https://travis-ci.com/github/brex-corndel/DevOps-Course-Starter
+
+# Docker Hub
+
+docker images
+
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+docker tag 721eaed5fe5 corndel/todo-app:latest
+docker push corndel/todo-app:latest
+
+docker tag todo-app:latest corndel/todo-app
+docker push todo-app:latest
+
+docker tag todo-app:latest corndel:todo-app:latest
+docker push corndel/todo-app:latest
+
+# Heroku Commands
+
+heroku login
+heroku plugins:install @heroku-cli/plugin-container-registry
+heroku config:set `cat .env | grep TRELLO_API_KEY`
+heroku config:set `cat .env | grep TRELLO_API_TOKEN`
+
+TRELLO_BOARD_ID
+TRELLO_TODO_LIST_ID
+TRELLO_DOING_LIST_ID
+SECRET_KEY
+
+heroku create
+
+in travis file
+
+heroku container:login - pass in as credentials
+docker tag j3rry99/corndel:todo-app registry.heroku.com/protected-ridge-40530/web
+docker push registry.heroku.com/protected-ridge-40530/web
+
+Heroku API
+env HEROKU_API_KEY
+heroku container:release web
+
+heroku open
+heroku logs --tail
+.
 
   
   
