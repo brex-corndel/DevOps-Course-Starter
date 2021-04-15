@@ -12,7 +12,7 @@ script:
    - docker tag todo-app:latest j3rry99/corndel:todo-app
    - docker push j3rry99/corndel:todo-app
 before_deploy:
-   - docker login --username=$HEROKU_USER --password=$HEROKU_LT_TOKEN registry.heroku.com
+   - docker login --username=$HEROKU_USER --password=$HEROKU_API_KEY registry.heroku.com
    - docker tag j3rry99/corndel:todo-app registry.heroku.com/protected-ridge-40530/web
    - docker push registry.heroku.com/protected-ridge-40530/web
 deploy:
@@ -31,3 +31,4 @@ notifications:
 env:
   global:
    - DOCKER_USERNAME = "j3rry99"
+   - HEROKU_APP = protected-ridge-40530
