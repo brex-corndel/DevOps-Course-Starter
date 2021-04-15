@@ -186,6 +186,7 @@ heroku container:release web
 
 heroku open
 heroku logs --tail
+.
 
   
   
